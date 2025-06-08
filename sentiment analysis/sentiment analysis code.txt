@@ -1,0 +1,41 @@
+# Install TextBlob (only needed in Google Colab or the first time in Jupyter)
+try:
+    from textblob import TextBlob
+except ImportError:
+    import os
+    os.system('pip install textblob')
+    from textblob import TextBlob
+
+# Function to analyze sentiment of a given text
+def analyze_sentiment(text):
+    blob = TextBlob(text)
+    polarity = blob.sentiment.polarity
+
+    if polarity > 0:
+        sentiment = "Positive 😀"
+    elif polarity < 0:
+        sentiment = "Negative 😞"
+    else:
+        sentiment = "Neutral 😐"
+    
+    print(f"\nText: {text}")
+    print(f"Polarity: {polarity}")
+    print(f"Sentiment: {sentiment}")
+
+# Main part
+print("=== Sentiment Analysis Tool ===")
+user_text = input("Enter a sentence for sentiment analysis: ")
+analyze_sentiment(user_text)
+
+# Optional: Run on a list of sample sentences
+print("\n--- Sample Sentences Sentiment ---")
+sample_sentences = [
+    "I love this product!",
+    "I hate waiting in long lines.",
+    "It's an average experience.",
+    "The weather is great today.",
+    "I don't like this movie."
+]
+
+for sentence in sample_sentences:
+    analyze_sentiment(sentence)
